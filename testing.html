@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <!-- Link to external CSS and JS libraries -->
+    <link rel="stylesheet" href="test/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="test/https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="test/https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="test/https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="test/https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="test/https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="test/https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="test/https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+    <style>
+        .container {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .image-display {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5">House Price Prediction</h1>
+
+    <h2>1. Data Preparation Data Loading</h2>
+    <div class="code-block">
+        <pre><code class="python">
+            import pandas as pd
+            import numpy as np
+            import matplotlib.pyplot as plt
+            import seaborn as sns
+            data =pd.read_excel(r"C:\Users\DELL\Downloads\HousePricePrediction.xlsx", sheet_name='Sheet1')
+            data
+            data.info()
+            data.dropna(inplace=True)
+            data.info()
+            import pandas as pd
+            import numpy as np
+            import matplotlib.pyplot as plt
+            import seaborn as sns
+            # Load dataset
+            df =  pd.read_excel(r"C:\Users\DELL\Downloads\HousePricePrediction.xlsx", sheet_name='Sheet1')
+            # Handle missing values if any
+            df.dropna(inplace=True)
+            # Encode categorical variables if needed
+            df = pd.get_dummies(df, columns=['MSZoning', 'LotConfig', 'BldgType', 'Exterior1st'])
+    
+    
+    
+      
+
+    <h2>2. Data Visualization</h2>
+    <div class="code-block">
+        <pre><code class="python">
+            # Sample a subset of data for pairplot visualization
+            sampled_df = df.sample(n=1000, random_state=42)  # Adjust the sample size as needed
+            
+            # Pairplot visualization
+            sns.pairplot(sampled_df[['SalePrice', 'LotArea', 'YearBuilt']])
+            plt.show()        </code></pre>
+    </div>
+    <h1>Image Display</h1>
+    <img class="image-display" id="image1" src="F:\Machine Learning Project\images\1 image output.png"alt="Uploaded Image">
+    import pandas as pd
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    
+    # Load the data from the Excel file
+    data = pd.read_excel(r"C:\Users\DELL\Downloads\HousePricePrediction.xlsx", sheet_name='Sheet1')
+    
+    # Select only numeric columns for the correlation matrix
+    numeric_data = data.select_dtypes(include=[float, int])
+    
+    # Create a correlation matrix from the numeric data
+    correlation_matrix = numeric_data.corr()
+    
+    # Set up the matplotlib figure
+    fig, ax = plt.subplots(figsize=(15, 6))
+    
+    # Create a heatmap using seaborn
+    sns.heatmap(data=correlation_matrix, linewidths=0.5, center=0, annot=True, ax=ax)
+    
+    # Display the plot
+    plt.show()
+    
+    <h1>Image Display</h1>
+    <img class="image-display" id="image1" src="F:\Machine Learning Project\images\2 image output.png"alt="Uploaded Image">
+    <script>
+        // Function to read image file and display it
+        function readAndDisplayImage(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                document.getElementById('image').src = imageData;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Event listener for file input change
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                readAndDisplayImage(file);
+            }
+        });
+        </script>
+        import pandas as pd
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        
+        def heatMap(dataframe, annot=True):
+            """
+            Generates and displays a heatmap for the correlation matrix of the given DataFrame.
+            
+            Parameters:
+            dataframe (pd.DataFrame): The input DataFrame.
+            annot (bool): Whether to annotate the cells with the correlation coefficients.
+            """
+            try:
+                # Select only numeric columns for the correlation matrix
+                numeric_data = dataframe.select_dtypes(include=[float, int])
+                
+                if numeric_data.empty:
+                    raise ValueError("The DataFrame does not contain numeric data.")
+                
+                # Create a correlation matrix from the numeric data
+                correlation_matrix = numeric_data.corr()
+                
+                # Set up the matplotlib figure
+                fig, ax = plt.subplots(figsize=(15, 6))
+                
+                # Create a heatmap using seaborn
+                sns.heatmap(data=correlation_matrix, linewidths=0.5, center=0, annot=annot, ax=ax)
+                
+                # Display the plot
+                plt.show()
+            
+            except Exception as e:
+                print(f"An error occurred: {e}")
+        
+        # Load the data from the Excel file
+        transactions_master_df = pd.read_excel(r"C:\Users\DELL\Downloads\HousePricePrediction.xlsx", sheet_name='Sheet1')
+        
+        # Call the heatMap function with the DataFrame and annotation preference
+        heatMap(transactions_master_df, annot=False)
+
+        <h1>Image Display</h1>
+        <img class="image-display" id="image1" src="F:\Machine Learning Project\images\3 image output.png" alt="Uploaded Image">    
+        <script>
+            // Function to read image file and display it
+            function readAndDisplayImage(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    document.getElementById('image').src = imageData;
+                };
+                reader.readAsDataURL(file);
+            }
+    
+            // Event listener for file input change
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    readAndDisplayImage(file);
+                }
+            });        
+            </script>
+
+    <h2>2. Feature Analysis Corelation Analysis:</h2>
+    <pre><code class="python">
+        import pandas as pd
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+        
+        # Load the data from the Excel file
+        data = pd.read_excel(r"C:\Users\DELL\Downloads\HousePricePrediction.xlsx", sheet_name='Sheet1')
+        
+        # Display the first few rows of the dataframe to understand its structure
+        print(data.head())
+        
+        # Display the column names to identify the correct name of the target variable
+        print(data.columns)
+        
+        # Assume the target variable (house prices) is named 'Price' (update this if the actual column name is different)
+        # For this example, let's assume we identified the correct column name is 'SalePrice'
+        target_variable = 'SalePrice'  # Update this line based on the actual column name in your data
+        
+        # Select only numeric columns for the correlation analysis
+        numeric_data = data.select_dtypes(include=[float, int])
+        
+        # Ensure the target variable is included in the numeric data
+        if target_variable not in numeric_data.columns:
+            raise KeyError(f"'{target_variable}' column not found in the numeric data columns.")
+        
+        # Create a correlation matrix from the numeric data
+        correlation_matrix = numeric_data.corr()
+        
+        # Set up the matplotlib figure
+        fig, ax = plt.subplots(figsize=(15, 6))
+        
+        # Create a heatmap using seaborn to visualize the correlation matrix
+        sns.heatmap(data=correlation_matrix, linewidths=0.5, center=0, annot=True, cmap='coolwarm', ax=ax)
+        
+        # Display the plot
+        plt.show()
+        
+        # Plot the correlation of features with the target variable
+        plt.figure(figsize=(10, 8))
+        correlation_with_target = correlation_matrix[target_variable].sort_values(ascending=False)
+        sns.barplot(x=correlation_with_target.values, y=correlation_with_target.index, palette='coolwarm')
+        
+        # Add labels and title
+        plt.xlabel('Correlation with House Prices')
+        plt.ylabel('Features')
+        plt.title('Correlation of Features with House Prices')
+        
+        # Display the plot
+        plt.show()
+        
+    <h1>Image Display</h1>
+    <img class="image-display" id="image1" src="F:\Machine Learning Project\images\4 image output.png" alt="Uploaded Image">    <h2>Image 02</h2>
+    <img class="image-display" id="image1" src="F:\Machine Learning Project\images\5 image output.png" alt="Uploaded Image">
+    <script>
+        // Function to read image file and display it
+        function readAndDisplayImage(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                document.getElementById('image').src = imageData;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Event listener for file input change
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                readAndDisplayImage(file);
+            }
+        });
+        </script>
+        
+    </code></pre>
+    
+    <h2>3. Building the Machine Learning Model</h2>
+    <div class="code-block">
+        <pre><code class="python">
+            import pandas as pd
+            from sklearn.model_selection import train_test_split
+            from sklearn.linear_model import LinearRegression
+            from sklearn.impute import SimpleImputer
+            from sklearn.metrics import mean_squared_error, r2_score
+            
+            # Load the data from the Excel file
+            data = pd.read_excel(r"C:\Users\DELL\Downloads\HousePricePrediction.xlsx", sheet_name='Sheet1')
+            
+            # Impute missing values with the mean
+            imputer = SimpleImputer(strategy='mean')
+            data_imputed = pd.DataFrame(imputer.fit_transform(data.select_dtypes(include=[float, int])), columns=data.select_dtypes(include=[float, int]).columns)
+            
+            # Update the target variable name based on the actual column name in your data
+            target_variable = 'SalePrice'  # Assuming the correct column name is 'SalePrice'
+            
+            # Select numeric columns for modeling (excluding the target variable)
+            numeric_columns = data_imputed.columns.tolist()
+            
+            # Ensure the target variable is not in the numeric columns list
+            if target_variable in numeric_columns:
+                numeric_columns.remove(target_variable)
+            
+            # Split the data into training and testing sets
+            X_train, X_test, y_train, y_test = train_test_split(data_imputed[numeric_columns], data_imputed[target_variable], test_size=0.2, random_state=42)
+            
+            # Initialize the Linear Regression model
+            model = LinearRegression()
+            
+            # Train the model on the training data
+            model.fit(X_train, y_train)
+            
+            # Make predictions on the testing data
+            y_pred = model.predict(X_test)
+            
+            # Evaluate the model
+            mse = mean_squared_error(y_test, y_pred)
+            r2 = r2_score(y_test, y_pred)
+            
+            print(f"Mean Squared Error (MSE): {mse:.2f}")
+            print(f"R-squared (R2) Score: {r2:.4f}")
+            
+    </div>
+    <h1>Model Evaluation</h1>
+    <p>Mean Squared Error (MSE): 2431796830.38</p>
+    <p>R-squared (R2) Score: 0.85</p>
+</div>
+
+<script>
+    // Function to read image file and display it
+    function readAndDisplayImage(file, id) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageData = e.target.result;
+            document.getElementById(id).src = imageData;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Event listener for file input change
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            readAndDisplayImage(file, 'image1');
+        }
+    });
+</script>
+
+</body>
+</html>
